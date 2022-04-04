@@ -1,0 +1,9 @@
+[Unit]
+Description=mounting Storage2 to SSD2
+
+[Mount]
+Where=/mnt/ssd2
+What=/dev/disk/by-label/storage2
+
+[Install]
+WantedBy=multi-user.target

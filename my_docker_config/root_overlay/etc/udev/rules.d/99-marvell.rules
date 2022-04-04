@@ -1,0 +1,1 @@
+ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1b4b", ATTR{device}=="0x9230", RUN+="/bin/bash -c 'echo %k > /sys/bus/pci/drivers/ahci/bind'"

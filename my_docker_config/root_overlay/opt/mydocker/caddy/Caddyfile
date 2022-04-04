@@ -1,0 +1,46 @@
+(log_common) {
+  log {
+    output file /var/log/caddy/{args.0}.access.log
+  }
+}
+
+YOUR-RADICALE-SERVER.duckdns.org {
+	handle_path /radicale* {
+		reverse_proxy localhost:5232 {
+			header_up X-Script-Name /radicale
+		}
+	}
+	import log_common YOUR-RADICALE-SERVER.duckdns.org
+}
+
+YOUR-HOMEASSISTANT-SERVER.duckdns.org {
+	reverse_proxy localhost:8123
+	import log_common YOUR-HOMEASSISTANT-SERVER.duckdns.org
+}
+
+
+
+
+http://YOUR-SNIKKET-SERVER.duckdns.org,
+http://groups.YOUR-SNIKKET-SERVER.duckdns.org,
+http://share.YOUR-SNIKKET-SERVER.duckdns.org {
+	reverse_proxy localhost:5080
+	request_body {
+  	max_size 20M
+  	}
+}
+
+YOUR-SNIKKET-SERVER.duckdns.org,
+groups.YOUR-SNIKKET-SERVER.duckdns.org,
+share.YOUR-SNIKKET-SERVER.duckdns.org {
+        tls /snikket/letsencrypt/live/YOUR-SNIKKET-SERVER.duckdns.org/fullchain.pem /snikket/letsencrypt/live/YOUR-SNIKKET-SERVER.duckdns.org/privkey.pem
+	reverse_proxy https://localhost:5443 {
+	    transport http {
+                tls_insecure_skip_verify
+            }
+        }
+        request_body {
+  	max_size 20M
+  	}
+}
+

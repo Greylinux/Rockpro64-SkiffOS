@@ -1,0 +1,3 @@
+# add you additonal packages to this file to be included in the build.
+# for example
+# BR2_PACKAGE_HTOP=y

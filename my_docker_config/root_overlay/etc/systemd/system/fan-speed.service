@@ -1,0 +1,11 @@
+[Unit]
+Description=change fan speed at startup 
+After=basic.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/opt/rockpro64_fan/fan_script.sh
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,36 @@
+[server]
+hosts = 0.0.0.0:5232
+
+max_connections = 15
+# 100 Megabyte
+max_content_length = 100000000
+# 30 seconds
+timeout = 20
+
+[auth]
+# Average delay after failed login attempts in seconds
+delay = 600
+
+type = htpasswd
+htpasswd_filename = /etc/radicale/users
+# encryption method used in the htpasswd file
+htpasswd_encryption = md5
+
+
+[storage]
+filesystem_folder = /data/collections
+
+
+[logging]
+
+#config = /var/log/radicale/log/logging.conf
+
+# Set the default logging level to debug
+#debug = True
+
+# Store all environment variables (including those set in the shell)
+#full_environment = False
+
+# Don't include passwords in logs
+#mask_passwords = True
+
